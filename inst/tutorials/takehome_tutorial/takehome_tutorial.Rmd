@@ -3,6 +3,7 @@ title: "Getting Started with R"
 output: 
   learnr::tutorial:
     allow_skip: true
+    progressive: true
 runtime: shiny_prerendered
 
 ---
@@ -47,6 +48,7 @@ head(measles)
 assign("measles", measles, envir=globalenv())
 ```
 
+###
 
 Now go ahead and use the below codeblock to inspect the data and answer the questions below. 
 
@@ -67,6 +69,15 @@ question(" What are the dimensions of the dataframe?",
 )
 ```
 
+### 
+
+```{r loaddata3, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
+```
+
 ```{r q1a, echo = FALSE}
 question(" What function do you use to view only the columnnames?",
          answer("cols()"),
@@ -75,6 +86,15 @@ question(" What function do you use to view only the columnnames?",
          answer("namecols()"),
          allow_retry = TRUE
 )
+```
+
+### 
+
+```{r loaddata4, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
 ```
 
 ```{r q1b, echo = FALSE}
@@ -87,16 +107,48 @@ question(" What does the function str() tell you?",
 )
 ```
 
+###
+
+```{r loaddata5, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
+```
+
 ```{r q1c, echo = FALSE}
 question(" What's the shortcut to print a value after variable assignment in your console if you didn't want to type print(new_value)?",
          answer("(measles_copy <- measles)", correct = TRUE),
          answer("measles_copy <- measles"),
          answer("View(measles_copy <- measles)", message = "Technically this opens it up in your viewer window, not your console"),
-         answer("p(measles_copy <- measles)"),
+         answer("print(measles_copy <- measles)", message = "Close! However, there's an even faster alternative"),
          allow_retry = TRUE
 )
 ```
-###  Manipulating Dataframes
+
+###
+
+
+```{r loaddata6, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
+```
+
+```{r q1d, echo = FALSE}
+question(" What's the class of the object measles and the class of",
+         answer("(measles_copy <- measles)", correct = TRUE),
+         answer("measles_copy <- measles"),
+         answer("View(measles_copy <- measles)", message = "Technically this opens it up in your viewer window, not your console"),
+         answer("print(measles_copy <- measles)", message = "Close! However, there's an even faster alternative"),
+         allow_retry = TRUE
+)
+```
+
+
+
+##  Manipulating Dataframes
 
 Use the below exercise box to answer the polls below: 
 
