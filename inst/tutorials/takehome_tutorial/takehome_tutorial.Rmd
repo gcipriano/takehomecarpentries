@@ -1,7 +1,10 @@
 ---
 title: "Getting Started with R"
-output: learnr::tutorial
+output: 
+  learnr::tutorial:
+    allow_skip: true
 runtime: shiny_prerendered
+
 ---
 
 ```{r setup, include=FALSE}
