@@ -7,22 +7,25 @@
 
 <!-- badges: end -->
 
-The goal of takehomecarpentries is to …
+The goal of takehomecarpentries is to practice what you learned at your
+[*Carpentries
+workshop*](http://swcarpentry.github.io/r-novice-inflammation/).
 
 ## Installation
 
-And the development version from [GitHub](https://github.com/) with:
+If do not have the package, devtools installed, please uncomment the
+install.packages() line item before running the next line. If you do
+have devtools installed, proceed with running the following code block:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("gcipriano/takehomecarpentries")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+Next, use the below functions to start your tutorial.
 
 ``` r
 library(takehomecarpentries)
-## basic example code
+
+run_tutorial("takehome_tutorial", package = "takehomecarpentries")
 ```

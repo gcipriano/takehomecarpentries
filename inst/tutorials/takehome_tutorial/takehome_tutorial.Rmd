@@ -9,69 +9,284 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 library(learnr)
+library(readr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Welcome
 
-## Topic 1
+This document contains a series of exercises to practice what you learned in your [_Carpentries_](http://swcarpentry.github.io/r-novice-inflammation/) workshop.See the link for the lesson materials.
 
-### Exercise 
 
-*Here's a simple exercise with an empty code chunk provided for entering the answer.*
 
-Write the R code required to add two plus two:
+### Table of Contents
 
-```{r two-plus-two, exercise=TRUE}
+In this tutorial, you will practice how to:
+
+* R Basics: read data into R, access subsets, plot data
+* Create Functions
+* Analyze Multiple Datasets
+* Using if/else statements
+
+
+
+## Getting Started with R
+
+### Load the data
+
+There are many ways to load data. While we will not use this dataset today, it is useful to know how to load a dataset directly from GitHub. See below for loading an example Tidy Tuesday dataset. Run the code to confirm that it was properly loaded.
+
+```{r filter1, exercise = TRUE, exercise.eval = FALSE, echo=FALSE}
+measles <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-25/measles.csv')
+
+
+head(measles)
+
+# Using global assignment to use in subsequent exercises
+
+assign("measles", measles, envir=globalenv())
+```
+
+
+Now go ahead and use the below codeblock to inspect the data and answer the questions below. 
+
+```{r loaddata2, exercise = TRUE, exercise.eval = FALSE}
+
+
+
 
 ```
 
-### Exercise with Code
-
-*Here's an exercise with some prepopulated code as well as `exercise.lines = 5` to provide a bit more initial room to work.*
-
-Now write a function that adds any two numbers and then call it:
-
-```{r add-function, exercise=TRUE, exercise.lines = 5}
-add <- function() {
-  
-}
-```
-
-## Topic 2
-
-### Exercise with Hint
-
-*Here's an exercise where the chunk is pre-evaulated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
-
-Modify the following code to limit the number of rows printed to 5:
-
-```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
-mtcars
-```
-
-```{r print-limit-hint}
-head(mtcars)
-```
-
-### Quiz
-
-*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
-
-Some questions to verify that you understand the purposes of various base and recommended R packages:
-
-```{r quiz}
-quiz(
-  question("Which package contains functions for installing other R packages?",
-    answer("base"),
-    answer("tools"),
-    answer("utils", correct = TRUE),
-    answer("codetools")
-  ),
-  question("Which of the R packages listed below are used to create plots?",
-    answer("lattice", correct = TRUE),
-    answer("tools"),
-    answer("stats"),
-    answer("grid", correct = TRUE)
-  )
+```{r q1, echo = FALSE}
+question(" What are the dimensions of the dataframe?",
+         answer("62342 x 20"),
+         answer("10293 x 21"),
+         answer("66113 x 16", correct = TRUE),
+         answer("70493 x 15"),
+         allow_retry = TRUE
 )
 ```
+
+```{r q1a, echo = FALSE}
+question(" What function do you use to view only the columnnames?",
+         answer("cols()"),
+         answer("colnames()", correct = TRUE),
+         answer("columnnames()"),
+         answer("namecols()"),
+         allow_retry = TRUE
+)
+```
+
+```{r q1b, echo = FALSE}
+question(" What does the function str() tell you?",
+         answer("column names, value preview, dimensions, number of null values"),
+         answer("column names, column types, number of null values"),
+         answer("column names, column types"),
+         answer("column names, column types, value preview, dimensions, classes of object", correct = TRUE),
+         allow_retry = TRUE
+)
+```
+
+```{r q1c, echo = FALSE}
+question(" What's the shortcut to print a value after variable assignment in your console if you didn't want to type print(new_value)?",
+         answer("(measles_copy <- measles)", correct = TRUE),
+         answer("measles_copy <- measles"),
+         answer("View(measles_copy <- measles)", message = "Technically this opens it up in your viewer window, not your console"),
+         answer("p(measles_copy <- measles)"),
+         allow_retry = TRUE
+)
+```
+###  Manipulating Dataframes
+
+Use the below exercise box to answer the polls below: 
+
+```{r manipulate_df, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
+```
+
+
+
+
+```{r q2, echo = FALSE}
+question(" What value is in the 10300th row in the 13th column?",
+         answer("2.33"),
+         answer("2", correct = TRUE),
+         answer("NA"),
+         answer("Arizona"),
+         allow_retry = TRUE
+)
+```
+
+```{r q3, echo = FALSE}
+question(" What values in the 50th row for columns titled 'year', 'name', and 'type'?",
+         answer("2.33"),
+         answer("2"),
+         answer("NA"),
+         answer("Arizona", correct = TRUE),
+         allow_retry = TRUE
+)
+```
+
+```{r q4, echo = FALSE}
+question(" What is the min and max of the column 'mmr'?",
+         answer("10,99"),
+         answer("1, 95"),
+         answer("0, 90"),
+         answer("-1, 100", correct = TRUE),
+         allow_retry = TRUE
+)
+```
+
+```{r q5, echo = FALSE}
+question(" Use the summary function to find the quartiles and mean for the xper, lat and lng columns. What are the mean values for each column?",
+         answer("7, 38.2, -94.34"),
+         answer("6.78, 39.15, -96.28", correct = TRUE),
+         answer("5.36, 40.21, -89.97"),
+         answer("8.20, 38.23, -90.36"),
+         allow_retry = TRUE
+)
+```
+
+
+This next question will combine concepts of subsetting and the function apply().
+
+Print the unique values listed in the state column using the apply function. Feel free to try out the unique function on any column to preview what it does.
+
+
+
+```{r apply_fn, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
+```
+
+    <div id="apply_fn-hint">
+    **Hint:** Be mindful of if you are applying the function across rows or columns. Remember 1 is across rows and 2 is across columns.
+    </div>
+
+```{r apply_fn-solution}
+
+apply(df[,2], 2, unique )
+
+```
+
+###  
+
+Good job! You can now see the results by running the name jan1 by itself. Or you can pass `jan1` to a function that takes data frames as input.
+
+Did you notice that this code used the double assignment operator, `==`? `==` is one of R's logical comparison operators. Comparison operators are key to using `filter()` let's take a look at them.
+
+## Practice Plotting
+
+### Comparison operators
+
+This exercise will combine previous lessons in subsetting data with the added task of plotting your data. 
+
+```{r}
+pi > 3
+```
+
+###  
+
+When you place a logical test inside of `filter()`, filter applies the test to each row in the data frame and then returns the rows that pass, as a new data frame.
+
+Our code above returned every row whose month value was equal to one _and_ whose day value was equal to one.
+
+### Watch out!
+
+When you start out with R, the easiest mistake to make is to test for equality with `=` instead of `==`. When this happens you'll get an informative error:
+
+```{r, error = TRUE}
+filter(flights, month = 1)
+```
+
+### Multiple tests
+
+If you give `filter()` more than one logical test, `filter()` will combine the tests with an implied "and."In other words, `filter()` will return only the rows that return `TRUE` for every test. You can combine tests in other ways with Boolean operators... 
+
+## Boolean operators
+
+### &, |, and !
+
+R uses boolean operators to combine multiple logical comparisons into a single logical test. These include `&` (_and_), `|` (_or_), `!` (_not_ or _negation_), and `xor()` (_exactly or_). 
+
+Both `|` and `xor()` will return TRUE is one or the other logical comparison returns TRUE. `xor()` differs from `|` in that it will return FALSE if both logical comparisons return TRUE. The name _xor_ stands for _exactly or_.
+
+Study the diagram below to get a feel for how these operators work.
+
+```{r fig1, echo = FALSE, out.width = "100%", fig.cap = "In the figure above, `x` is the left-hand circle, `y` is the right-hand circle, and the shaded region show which parts each operator selects."}
+knitr::include_graphics("images/transform-logical.png")
+```
+
+### Test Your Knowledge
+
+```{r logicals, echo = FALSE}
+question(" What will the following code return? `filter(flights, month == 11 | month == 12)`",
+         answer("Every flight that departed in November _or_ December", correct = TRUE),
+         answer("Every flight that departed in November _and_ December", message = "Technically a flight could not have departed in November _and_ December unless it departed twice."),
+         answer("Every flight _except for_ those that departed in November or December"),
+         answer("An error. This is an incorrect way to combine tests.", message = "The next section will say a little more about combining tests."),
+         allow_retry = TRUE
+)
+```
+
+### Common mistakes
+
+In R, the order of operations doesn't work like English. You can't write `filter(flights, month == 11 | 12)`, even though you might say  "finds all flights that departed in November or December". Be sure to write oue a _complete_ test on each side of a boolean operator.
+
+Here are four more tips to help you use logical tests and Boolean operators in R:
+
+###  
+
+1. A useful short-hand for this problem is `x %in% y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code in the question above:
+
+    ```{r, eval = FALSE}
+    nov_dec <- filter(flights, month %in% c(11, 12))
+    ```
+
+###  
+
+2. Sometimes you can simplify complicated subsetting by remembering De Morgan's law: `!(x & y)` is the same as `!x | !y`, and `!(x | y)` is the same as `!x & !y`. For example, if you wanted to find flights that weren't delayed (on arrival or departure) by more than two hours, you could use either of the following two filters:
+
+    ```{r, eval = FALSE}
+    filter(flights, !(arr_delay > 120 | dep_delay > 120))
+    filter(flights, arr_delay <= 120, dep_delay <= 120)
+    ```
+
+###  
+
+3. As well as `&` and `|`, R also has `&&` and `||`. Don't use them with `filter()`! You'll learn when you should use them later.
+
+###  
+
+4. Whenever you start using complicated, multipart expressions in `filter()`, consider making them explicit variables instead. That makes it much easier to check your work. You'll learn how to create new variables shortly.
+
+## Missing values
+
+### NA
+
+Missing values can make comparisons tricky in R. R uses `NA` to represent missing or unknown values. `NA`s are "contagious" because almost any operation involving an unknown value (`NA`) will also be unknown (`NA`). For example, can you determine what value these expressions that use missing values shoudl evaluate to? Make a prediction and then click "Submit Answer".
+
+```{r nas, exercise = TRUE, evaluate.exercise = FALSE}
+NA > 5
+10 == NA
+NA + 10
+NA / 2
+```
+
+```{r nas-check}
+"In every case, R does not have enough information to compute a result. Hence, each result is an unknown value, `NA`."
+```
+
+### is.na()
+
+The most confusing result above is this one:
+
+```{r}
+NA == NA
+```
+
