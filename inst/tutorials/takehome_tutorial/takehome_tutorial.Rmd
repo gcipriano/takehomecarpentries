@@ -148,11 +148,11 @@ question(" What's the class of the object measles and the class of",
 
 
 
-##  Manipulating Dataframes
+##  indexing Dataframes
 
 Use the below exercise box to answer the polls below: 
 
-```{r manipulate_df, exercise = TRUE, exercise.eval = FALSE}
+```{r index1, exercise = TRUE, exercise.eval = FALSE}
 
 
 
@@ -162,7 +162,7 @@ Use the below exercise box to answer the polls below:
 
 
 
-```{r q2, echo = FALSE}
+```{r indexq1, echo = FALSE}
 question(" What value is in the 10300th row in the 13th column?",
          answer("2.33"),
          answer("2", correct = TRUE),
@@ -172,17 +172,60 @@ question(" What value is in the 10300th row in the 13th column?",
 )
 ```
 
-```{r q3, echo = FALSE}
-question(" What values in the 50th row for columns titled 'year', 'name', and 'type'?",
-         answer("2.33"),
-         answer("2"),
-         answer("NA"),
-         answer("Arizona", correct = TRUE),
+###
+
+```{r index2, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
+```
+
+    <div id="index2-hint">
+    **Hint:** Remember you can use the column numbers in the index to see the three values at once
+    </div>
+    
+```{r indexq2, echo = FALSE}
+question(" What values in the 50th row for columns titled 'state', 'year', and 'enroll'?",
+         answer("Arizona, 2017-18, 85"),
+         answer("Arizona, 2018-19, 94"),
+         answer("Arizona, 2017-18, 80"),
+         answer("Arizona, 2018-19, 73", correct = TRUE),
          allow_retry = TRUE
 )
 ```
 
-```{r q4, echo = FALSE}
+###
+
+```{r index3, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
+```
+
+```{r indexq3, echo = FALSE}
+question(" How would you print the 700th row and all columns except the last and second to last column? (Pick all that apply)",
+         answer("measles[-15:-16, 700]"),
+         answer("measles[700, 1:14]", correct = TRUE),
+         answer("measles[700, -15:-16]", correct = TRUE),
+         answer("measles[1:14, 700]"),
+         allow_retry = TRUE
+)
+```
+
+###
+
+## Using Functions on Subsets
+
+```{r fn1, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
+```
+
+```{r fn1q, echo = FALSE}
 question(" What is the min and max of the column 'mmr'?",
          answer("10,99"),
          answer("1, 95"),
@@ -192,7 +235,16 @@ question(" What is the min and max of the column 'mmr'?",
 )
 ```
 
-```{r q5, echo = FALSE}
+###
+
+```{r fn2, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+
+```
+
+```{r fn2q, echo = FALSE}
 question(" Use the summary function to find the quartiles and mean for the xper, lat and lng columns. What are the mean values for each column?",
          answer("7, 38.2, -94.34"),
          answer("6.78, 39.15, -96.28", correct = TRUE),
@@ -203,10 +255,13 @@ question(" Use the summary function to find the quartiles and mean for the xper,
 ```
 
 
+###
+
 This next question will combine concepts of subsetting and the function apply().
 
-Print the unique values listed in the state column using the apply function. Feel free to try out the unique function on any column to preview what it does.
+Next, print the unique values listed in the state and county columns together using the apply function and c() function. 
 
+Feel free to try out the unique() function on any column to preview what it does.
 
 
 ```{r apply_fn, exercise = TRUE, exercise.eval = FALSE}
@@ -222,43 +277,148 @@ Print the unique values listed in the state column using the apply function. Fee
 
 ```{r apply_fn-solution}
 
-apply(df[,2], 2, unique )
+apply(measles[,c(2,7)], 2, unique)
 
 ```
 
 ###  
 
-Good job! You can now see the results by running the name jan1 by itself. Or you can pass `jan1` to a function that takes data frames as input.
+## Creating Functions
 
-Did you notice that this code used the double assignment operator, `==`? `==` is one of R's logical comparison operators. Comparison operators are key to using `filter()` let's take a look at them.
+In the code block below, create a function titled 'count_unique' that will count the number of unique values for a specified column.
 
-## Practice Plotting
+You should use the following steps:
 
-### Comparison operators
+1. Assign a variable that contains all unique values for that column with the unique() function.
+2. Use the length() function to count the number of values in the variable you created in step 1.
 
-This exercise will combine previous lessons in subsetting data with the added task of plotting your data. 
+```{r createfnq1, exercise = TRUE, exercise.eval = FALSE}
 
-```{r}
-pi > 3
+
+
 ```
 
-###  
+
+```{r createfnq1-solution}
+
+count_unique <- function(col_name) {
+  unique_values <- unique(col_name)
+  
+  length(unique_values)
+}
+
+```
+
+###
+
+```{r usefn1, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+```
+
+```{r usefn1q, echo = FALSE}
+question(" Using the function you created above, how many unique cities are there in the dataset?",
+         answer("5666", correct = TRUE),
+         answer("604"),
+         answer("2317"),
+         answer("9503"),
+         allow_retry = TRUE
+)
+```
+
+###
+
+
+```{r usefn2, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+```
+
+```{r usefn2q, echo = FALSE}
+question(" Using the function you created above, how many unique cities are there in the dataset?",
+         answer("5666", correct = TRUE),
+         answer("604"),
+         answer("2317"),
+         answer("9503"),
+         allow_retry = TRUE
+)
+```
+
+###
+
+Now create a second function titled 'count_na' that calculates the number of NA's in each column.
+
+First, use the is.na() function around a specific column. 
+Second, use the sum() function to count the number of values that return TRUE. (If the logical value returned is TRUE, that means there is an NA and therefore we should count it.)
+
+```{r usefn3, exercise = TRUE, exercise.eval = FALSE}
+
+
+
+```
+
+```{r usefn3-solution}
+
+count_na <- function(col_name) {
+  sum(is.na(col_name))
+}
+
+```
+
+
+```{r usefn3q, echo = FALSE}
+question(" Using the function you created above, what are possible function calls to find the number of NA values for the 'city' column? (Select all that apply)",
+         answer("count_na(measles$city)", correct = TRUE),
+         answer("count_na(measles[6,]"),
+         answer("count_na(measles[,6])", correct = TRUE),
+         answer("count_na(measles['city'])", correct = TRUE),
+         allow_retry = TRUE
+)
+```
+
+
+###
+
+```{r usefn4, exercise = TRUE, exercise.eval = FALSE}
+
+print_col <- function(colname) {
+  print(colname)
+}
+
+count_col_na <- function(colname = city) {
+  print(colname)
+}
+
+count_unique_val <- function(colname = measles$state) {
+  unique_val <- unique(colname)
+  length(unique_val)
+}
+
+print_unique <- function(colname) {
+  colname <- measles$state
+  unique(colname)
+}
+
+
+```
+
+```{r usefn4q, echo = FALSE}
+question(" Of the functions above, which one correctly passes an argument as a default? (Select all that apply)",
+         answer("print_col"),
+         answer("count_col_na"),
+         answer("count_unique_val", correct = TRUE),
+         answer("print_unique"),
+         allow_retry = TRUE
+)
+```
+
 
 When you place a logical test inside of `filter()`, filter applies the test to each row in the data frame and then returns the rows that pass, as a new data frame.
 
 Our code above returned every row whose month value was equal to one _and_ whose day value was equal to one.
 
-### Watch out!
-
-When you start out with R, the easiest mistake to make is to test for equality with `=` instead of `==`. When this happens you'll get an informative error:
-
-```{r, error = TRUE}
-filter(flights, month = 1)
-```
-
-### Multiple tests
-
-If you give `filter()` more than one logical test, `filter()` will combine the tests with an implied "and."In other words, `filter()` will return only the rows that return `TRUE` for every test. You can combine tests in other ways with Boolean operators... 
 
 ## Boolean operators
 
